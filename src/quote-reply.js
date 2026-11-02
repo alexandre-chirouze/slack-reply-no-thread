@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const KEY = '__slackQuoteReply';
-  const VERSION = '1.3.0';
+  const VERSION = '1.3.1';
   if (window[KEY]?.version === VERSION) return;
   window[KEY]?.dispose();
 
@@ -206,8 +206,11 @@
       const row = card.closest(ROW);
       const host = row && [...row.querySelectorAll('[data-qa="message_content"]')]
         .find(element => element.closest(ROW) === row && !element.closest(CARD));
-      if (!host || (!row.closest(THREAD) && !(row.closest(PRIMARY) && row.closest('[data-qa="message_pane"]'))) ||
-          card.closest('[role="dialog"]')) continue;
+      const scope = row?.closest(THREAD) || row?.closest(PRIMARY);
+      // Slack can mark the main conversation itself as a dialog. Exclude only
+      // dialogs nested inside that pane, matching the composer routing rule.
+      if (!host || !scope || (!row.closest(THREAD) && !row.closest('[data-qa="message_pane"]')) ||
+          card.closest('[role="dialog"]') !== scope.closest('[role="dialog"]')) continue;
       const content = previewContent(card);
       const signature = JSON.stringify(content);
       let entry = previews.get(card);

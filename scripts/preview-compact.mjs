@@ -53,6 +53,20 @@ try {
   await check('Native card is collapsed and summary is one line above the author', `getComputedStyle(${card}).display === 'none' && document.querySelector('.sqr-preview-text').getBoundingClientRect().height <= 20`);
   await check('Summary retains author, source, and alert text', `${toggle}.textContent.includes('Bridge Monitor') && ${toggle}.title.includes('bridge-alerts') && ${toggle}.textContent.includes('12 previously priced lanes')`);
   await check('Context sits above the replying author and redundant arrow is hidden', `${toggle}.getBoundingClientRect().bottom <= document.querySelector('.sender').getBoundingClientRect().top && getComputedStyle(document.querySelector('.reference-line')).display === 'none'`);
+  await check('A main conversation with dialog semantics still gets reply context', `!!${toggle} && ${toggle}.closest('[role="dialog"]') === document.querySelector('main')`);
+  await evaluate(client, `(() => {
+    const dialog = document.createElement('div');
+    dialog.id = 'nested-dialog-fixture';
+    dialog.setAttribute('role', 'dialog');
+    const clone = document.querySelector('[data-qa="message_container"]').cloneNode(true);
+    clone.querySelector('[data-slack-reply-context]').remove();
+    clone.querySelectorAll('[data-slack-reply-preview-collapsed]').forEach(e => e.removeAttribute('data-slack-reply-preview-collapsed'));
+    dialog.append(clone);
+    document.querySelector('main').append(dialog);
+  })()`);
+  await delay(80);
+  await check('An actual nested dialog remains excluded', `!document.querySelector('#nested-dialog-fixture [data-slack-reply-preview-toggle]')`);
+  await evaluate(client, `document.querySelector('#nested-dialog-fixture').remove()`);
   await mkdir(output, { recursive: true });
   async function screenshot(name, label) {
     await evaluate(client, `document.getElementById('state-label').textContent = ${JSON.stringify(label)}`);

@@ -215,7 +215,7 @@ async function install() {
 <key>CFBundleName</key><string>Slack Quote Reply</string>
 <key>CFBundleDisplayName</key><string>Slack Quote Reply</string>
 <key>CFBundleIdentifier</key><string>local.slack-quote-reply.launcher</string>
-<key>CFBundleVersion</key><string>1.3.0</string>
+<key>CFBundleVersion</key><string>1.3.1</string>
 <key>CFBundlePackageType</key><string>APPL</string>
 <key>CFBundleExecutable</key><string>launch</string>
 <key>CFBundleIconFile</key><string>slack.icns</string>
