@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Compact reply preview</title>
+<style>
+* { box-sizing: border-box; }
+body { margin:0; padding:32px; background:#1a1d21; color:#e8e8e9; font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+main { max-width:940px; margin:auto; }
+.note { font-size:11px; color:#9ca0a5; letter-spacing:.1em; text-transform:uppercase; margin-bottom:20px; }
+.message { display:flex; gap:12px; padding:20px; border-radius:0; background:#222529; }
+.avatar { width:36px; height:36px; border-radius:50%; background:#8055b5; display:grid; place-items:center; font-weight:700; flex:none; }
+.content { flex:1; min-width:0; }
+.sender { font-weight:700; font-size:16px; }
+.time { font-size:12px; color:#a4a5a7; margin-left:8px; font-weight:400; }
+p.answer { margin:3px 0 2px; }
+a { color:#36b5db; text-decoration:none; }
+.reference-line { margin:0; }
+.reference { display:block; width:max-content; margin-bottom:7px; }
+[data-qa="forwarded_message_card"] { border:1px solid #424449; border-radius:10px; padding:16px; cursor:pointer; background:#1a1d21; }
+.headerRow { display:flex; gap:10px; align-items:center; margin-bottom:14px; }
+.headerRow img { width:36px; height:36px; border-radius:8px; }
+.headerText { min-width:0; }
+.byline { display:flex; align-items:center; gap:8px; }
+[data-qa="message_attachment_author_name"] { border:0; padding:0; font-family:inherit; line-height:1.4; font-size:16px; font-weight:700; background:none; color:inherit; }
+.badge { background:#33363a; color:#b8b8ba; font-size:10px; font-weight:600; padding:0 4px; border-radius:3px; }
+.context__fixture { font-size:13px; color:#a3a4a6; }
+.context__fixture a, [data-qa="attachment-footer-timestamp"] a { color:inherit; }
+[data-qa="attachment-footer-timestamp"] { font-size:12px; color:#a3a4a6; }
+.p-rich_text_section + .p-rich_text_section { margin-top:17px; }
+.title { font-size:17px; }
+.show-more { margin-top:8px; color:#36b5db; font-weight:600; }
+.footer { margin:18px 0 0 68px; font-size:12px; color:#90949a; }
+</style>
+<main class="p-view_contents--primary">
+<div class="note">Discord-style reply · <span id="state-label">Collapsed</span></div>
+<div data-qa="message_pane">
+<article class="message" data-qa="message_container" data-msg-ts="1793636860.000001" data-msg-channel-id="C123">
+<div class="c-message_kit__gutter__left"><div class="avatar" aria-hidden="true">AM</div></div>
+<div class="content" data-qa="message_content">
+<div class="sender">Alex Morgan <span class="time">5:21 PM</span></div>
+<div data-qa="message-text"><p class="answer">The upstream service is unavailable; our bridge is healthy.</p>
+<p class="reference-line"><a class="reference" href="https://example.slack.com/archives/C123/p1793636465149379">↗</a></p></div>
+<div class="c-message_attachment__body">
+<div data-qa="forwarded_message_card">
+<div class="headerRow">
+<img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Crect width='36' height='36' rx='8' fill='%23e3fffa'/%3E%3Ccircle cx='18' cy='12' r='7' fill='%2300c9b7'/%3E%3Cpath d='M4 36v-3a14 14 0 0 1 28 0v3' fill='%2300c9b7'/%3E%3C/svg%3E">
+<div class="headerText"><div class="byline"><button data-qa="message_attachment_author_name" type="button">Bridge Monitor</button><span class="badge">APP</span><span data-qa="attachment-footer-timestamp"><a href="https://example.slack.com/archives/C123/p1793636465149379">5:21 PM</a></span></div>
+<div class="context__fixture"><a href="https://example.slack.com/archives/C123/p1793636465149379">Posted in 🔒 bridge-alerts</a></div></div>
+</div>
+<div class="body"><div data-qa="message_attachment_slack_msg_text"><div class="p-rich_text_block">
+<div class="p-rich_text_section title"><strong>CRITICAL · production · stable_bridge_quotes_stale</strong></div>
+<div class="p-rich_text_section">USDT bridge quotes expired on 12 previously priced lanes; no fresh primary reference is available for these directions.</div>
+<div class="p-rich_text_section">Open<br>Occurrences: 3 · First: 2026-10-30 09:10:20 UTC · Last: 2026-11-02 13:11:55 UTC</div>
+<div class="p-rich_text_section">asset: USDT</div>
+</div></div><div class="show-more">Show more</div></div>
+</div>
+</div>
+</div>
+</article>
+</div>
+<p class="footer">Only your local display changes. Other people continue to see Slack’s original preview.</p>
+</main>
+</html>

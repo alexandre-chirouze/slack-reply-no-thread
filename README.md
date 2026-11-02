@@ -14,6 +14,22 @@ The cursor returns to the end of your answer; **⌘Z** removes the inserted link
 in one step. Links retain the original message's thread context. Search results
 are excluded, and a message must have a native timestamp permalink.
 
+## Discord-style reply context
+
+Message previews in conversations and open threads become a single reply-context
+line above the replying author's name, with a curved connector, small avatar,
+author, and an excerpt truncated with an ellipsis. The source conversation and
+time are available in the hover tooltip. Click the line (or focus it and press
+Enter/Space) to show Slack's original card below the answer; click again to hide
+it. Native links and controls remain available in the expanded card. File and
+website previews are not compacted, and unsupported message layouts are left alone.
+
+The redundant **↗** is hidden locally when it matches the displayed preview;
+it stays in the sent message. This only changes the display on computers running
+this plugin. It does not edit messages or change what other recipients see.
+Stopping the plugin restores the native cards and links. Slack's existing
+**Show more** control may still be needed for content Slack itself truncates.
+
 ## Requirements
 
 - **macOS** with Slack Desktop installed at `/Applications/Slack.app`.
@@ -233,3 +249,19 @@ Compatibility observed during development: Slack **4.52.171** on macOS
 Use Conventional Commits for commits and PR titles, for example
 `fix: preserve thread context in reply links`. Use purpose-based branch names
 such as `feat/compact-replies` or `fix/composer-routing`.
+
+### Review the compact design without installing
+
+With Google Chrome installed at its standard macOS location, run:
+
+```sh
+UV_THREADPOOL_SIZE=1 OMP_NUM_THREADS=1 npm run preview:compact
+```
+
+This opens a separate headless Chrome process with a disposable profile, renders
+an illustrative Slack-style fixture with the actual plugin code, checks expansion,
+keyboard access, edits, narrow layouts, and cleanup, and writes `collapsed.png`
+and `expanded.png` to the ignored `preview-output/` directory. It does not connect
+to Slack or modify the installation. Set `CHROME_PATH` to use another Chrome
+executable; pass an output directory after `--` to save the screenshots elsewhere.
+These are isolated design previews, not screenshots of the user's live Slack.
