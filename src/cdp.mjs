@@ -10,7 +10,7 @@ export async function targets(port) {
   });
 }
 
-export async function connect(url) {
+export async function connect(url, { onEvent } = {}) {
   const parsed = new URL(url);
   if (parsed.protocol !== 'ws:' || parsed.hostname !== '127.0.0.1') throw new Error('Debugger must be on loopback');
   const socket = new WebSocket(url);
@@ -23,6 +23,7 @@ export async function connect(url) {
   const pending = new Map();
   socket.addEventListener('message', event => {
     const message = JSON.parse(event.data);
+    if (message.method) { onEvent?.(message); return; }
     const call = pending.get(message.id);
     if (!call) return;
     pending.delete(message.id);

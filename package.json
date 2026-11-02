@@ -3,7 +3,7 @@
   "version": "1.3.1",
   "private": true,
   "type": "module",
-  "description": "Local quote-reply button for Slack Desktop on macOS",
+  "description": "Local quote-reply button for Slack in Chrome and Slack Desktop on macOS",
   "engines": { "node": ">=22" },
   "scripts": {
     "start": "node src/launcher.mjs start",
@@ -13,6 +13,7 @@
     "uninstall": "node src/launcher.mjs uninstall",
     "test": "node --test --test-concurrency=1 test/*.test.mjs",
     "preview:compact": "node scripts/preview-compact.mjs",
-    "test:slack": "node scripts/verify-slack.mjs"
+    "test:slack": "node scripts/verify-slack.mjs",
+    "test:chrome": "node scripts/verify-chrome.mjs"
   }
 }
