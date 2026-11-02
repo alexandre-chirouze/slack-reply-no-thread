@@ -1,0 +1,17 @@
+{
+  "name": "slack-quote-reply",
+  "version": "1.2.1",
+  "private": true,
+  "type": "module",
+  "description": "Local quote-reply button for Slack Desktop on macOS",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node src/launcher.mjs start",
+    "install": "node src/launcher.mjs install",
+    "stop": "node src/launcher.mjs stop",
+    "status": "node src/launcher.mjs status",
+    "uninstall": "node src/launcher.mjs uninstall",
+    "test": "node --test --test-concurrency=1 test/*.test.mjs",
+    "test:slack": "node scripts/verify-slack.mjs"
+  }
+}
